@@ -55,7 +55,6 @@ int main() {
         cerr << "Error: N must be a multiple of 8" << endl;
         return 1;
     }
-    cout << endl;
     
     cout << "Enter the binary matrix of " << N << " rows and 64 columns, "
          << "each row must be saparated by spaces or newlines:" << endl;
