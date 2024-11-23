@@ -7,7 +7,7 @@
 
 #include "drawing.h"
 
-void write() {
+void writeDrawing() {
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 64; ++j) {
             int index = i * 64 + j;
@@ -43,7 +43,7 @@ void loop(char scroll_up, int num_loops){
     }
 }
 
-void animate() {
+void animateDrawing() {
     while(1) {
             loop(1, 3);
             __delay_ms(1000);
