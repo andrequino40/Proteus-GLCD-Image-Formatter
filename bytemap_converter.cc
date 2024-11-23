@@ -56,7 +56,7 @@ int main() {
         return 1;
     }
 
-    cout << "\nEnter the binary matrix of " << N << " rows and 64 columns\n"
+    cout << "\nEnter the binary matrix of " << N << " rows and 64 columns, "
          << "each row must be saparated by spaces or newlines:\n";
 
     for (int i = 0; i < N; i++) {
@@ -87,6 +87,6 @@ int main() {
     headerFile << headerContent.str();
     headerFile.close();
 
-    cout << "Header file created" << endl;
+    cout << "Header file created!" << endl;
     return 0;
 }

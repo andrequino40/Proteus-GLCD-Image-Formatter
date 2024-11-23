@@ -7,4 +7,4 @@ converter: bytemap_converter.cc
 drawing: converter
 	./bytemap_converter.o < $(INPUT_FOLDER)/$(INPUT_FILE)
 clean:
-	rm bytemap_converter.o
+	rm bytemap_converter.o drawing.h
