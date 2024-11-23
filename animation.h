@@ -1,8 +1,17 @@
+// distance of 64x64 image from left side (maximum 64)
+#define OFFSET 32
+// set frequency for delays
+#ifndef _XTAL_FREQ
+#define _XTAL_FREQ 8000000
+#endif
+
+#include "drawing.h"
+
 void write() {
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 64; ++j) {
             int index = i * 64 + j;
-            writeByte(i, 32 + j, pbytemap[index]);
+            writeByte(i, OFFSET + j, drawing[index]);
         }
     }
 }
@@ -35,9 +44,7 @@ void loop(char scroll_up, int num_loops){
 }
 
 void animate() {
-    write(); 
     while(1) {
-            
             loop(1, 3);
             __delay_ms(1000);
             loop(0, 3);

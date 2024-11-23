@@ -8,13 +8,9 @@
 
 using namespace std;
 vector<vector<uint8_t>> groupBits(const string& input, int rows) {
-    // Result matrix: 8 rows of 64 bytes each
-    // vector de vectores de un byte
-    // cada vector de 8 bits es una columna de su pagina
     int pages = rows/8;
     vector<vector<uint8_t>> output(pages, vector<uint8_t>(64, 0));
 
-    // Process each column of 64 bits in the input
     for (int col = 0; col < 64; ++col) {
         for (int row = 0; row < pages; ++row) {
             uint8_t byte = 0;
@@ -84,9 +80,9 @@ int main() {
     }
 
     stringstream headerContent;
-    headerContent << "char bytemap[512] = {\n";
+    headerContent << "#ifndef DRAWING_H\n" << "#define DRAWING_H\n" << "char drawing[512] = {\n";
     insertMatrix(bytemap, headerContent);
-    headerContent << "};";
+    headerContent << "};\n" << "#endif\n";
 
     headerFile << headerContent.str();
     headerFile.close();
