@@ -11,7 +11,7 @@ You can create binary pixel art using any text editor.
 - **Specifications:**  
   - **Size:** 64 × 64 pixels recommended.  
   - **Width:** The image **must** be 64 bits wide.
-  - **Height:** The height **must** be a multiple of 8- 
+  - **Height:** The height **must** be a multiple of 8.
 
 ---
 
