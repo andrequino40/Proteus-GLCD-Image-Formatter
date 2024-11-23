@@ -49,7 +49,8 @@ int main() {
 
     cout << "Enter the number of rows (must be a multiple of 8): ";
     cin >> N;
-
+    cout << endl;
+    
     if ((N % 8) != 0) {
         cerr << "Error: N must be a multiple of 8" << endl;
         return 1;
