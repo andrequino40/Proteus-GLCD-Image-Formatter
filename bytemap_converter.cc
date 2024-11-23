@@ -25,12 +25,11 @@ vector<vector<uint8_t>> groupBits(const string& input, int rows) {
 }
 
 void printMatrix(const vector<vector<uint8_t>>& matrix) {
-    cout << "\n\n";
     for (const auto& row : matrix) {
         for (uint8_t byte : row) {
             cout << "0x" << hex << setfill('0') << setw(2) << (int)byte << ", ";
         }
-        cout << "\n";
+        cout << endl;
     }
 }
 
@@ -52,12 +51,13 @@ int main() {
     cin >> N;
 
     if ((N % 8) != 0) {
-        cerr << "Error: N must be a multiple of 8 \n";
+        cerr << "Error: N must be a multiple of 8" << endl;
         return 1;
     }
-
-    cout << "\nEnter the binary matrix of " << N << " rows and 64 columns, "
-         << "each row must be saparated by spaces or newlines:\n";
+    cout << endl;
+    
+    cout << "Enter the binary matrix of " << N << " rows and 64 columns, "
+         << "each row must be saparated by spaces or newlines:" << endl;
 
     for (int i = 0; i < N; i++) {
         cin >> row;
