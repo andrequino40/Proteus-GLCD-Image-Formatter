@@ -1,5 +1,5 @@
-// distance of 64x64 image from left side (maximum 64)
-#define OFFSET 32
+// distance of image from the left side of the screen
+#define OFFSET 0
 // set frequency for delays
 #ifndef _XTAL_FREQ
 #define _XTAL_FREQ 8000000
@@ -8,9 +8,9 @@
 #include "drawing.h"
 
 void writeDrawing() {
-    for (int i = 0; i < 8; ++i) {
-        for (int j = 0; j < 64; ++j) {
-            int index = i * 64 + j;
+    for (int i = 0; i < PAGES; ++i) {
+        for (int j = 0; j < COLUMNS; ++j) {
+            int index = i * COLUMNS + j;
             writeByte(i, OFFSET + j, drawing[index]);
         }
     }

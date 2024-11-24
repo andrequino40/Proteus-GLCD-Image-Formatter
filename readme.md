@@ -8,10 +8,9 @@ You can create binary pixel art using any text editor.
 
 - **Recommended:** Use an image or create a pixel art design. Use a converter such as [dCode Binary Image Converter](https://www.dcode.fr/binary-image).  
 - **Adjustments:** The output from the website might neet to be edited.
-- **Specifications:**  
-  - **Size:** 64 × 64 pixels recommended.  
-  - **Width:** The image **must** be 64 bits wide.
-  - **Height:** The height **must** be a multiple of 8.
+- **Size:**  
+  - **Width:** The image **should** should be 128 pixels wide or less.
+  - **Height:** The height **must** be a multiple of 8 and **should** be 64 pixels high or less.
 
 ---
 
@@ -30,11 +29,14 @@ You can also test with the included inputs.
 
 ### 3: Create the Input File  
 
-1. **Write the Number of Columns (N):**  
-   - `N` is the number of columns in your bit art.  
+1. **Write the Number of rows (N):**  
+   - `N` is the number of rows in your bit art.  
    - `N` must be a multiple of 8.
 
-2. **Paste Your Bit Art:**  
+2. **Write the Number of columns (M):**  
+   - `M` is the number of columns in your bit art.  
+
+3. **Paste Your Bit Art:**  
    - Place the binary pixel art below.
 
 ---

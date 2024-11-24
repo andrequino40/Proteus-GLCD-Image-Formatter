@@ -7,18 +7,18 @@
 #include <sstream>
 
 using namespace std;
-vector<vector<uint8_t>> groupBits(const string& input, int rows) {
+vector<vector<uint8_t>> groupBits(const string& input, int rows, int columns) {
     int pages = rows/8;
-    vector<vector<uint8_t>> output(pages, vector<uint8_t>(64, 0));
+    vector<vector<uint8_t>> output(pages, vector<uint8_t>(columns, 0));
 
-    for (int col = 0; col < 64; ++col) {
-        for (int row = 0; row < pages; ++row) {
+    for (int num_col = 0; num_col < columns; ++num_col) {
+        for (int num_page = 0; num_page < pages; ++num_page) {
             uint8_t byte = 0;
             for (int bit = 0; bit < 8; ++bit) {
-                int index = (row * 8 + bit) * 64 + col;
+                int index = (num_page * 8 + bit) * columns + num_col;
                 byte |= (input[index] - '0') << bit;
             }
-            output[row][col] = byte;
+            output[num_page][num_col] = byte;
         }
     }
     return output;
@@ -44,11 +44,13 @@ void insertMatrix(const vector<vector<uint8_t>>& matrix, stringstream& ss) {
 }
 
 int main() {
-    int N;
+    int N, M;
     string row, input;
 
-    cout << "Enter the number of rows (must be a multiple of 8): ";
+    cout << "Enter the number of rows N (must be a multiple of 8): ";
     cin >> N;
+    cout << "Enter the number of columns M: ";
+    cin >> M;
     cout << endl;
     
     if ((N % 8) != 0) {
@@ -56,7 +58,7 @@ int main() {
         return 1;
     }
     
-    cout << "Enter the binary matrix of " << N << " rows and 64 columns, "
+    cout << "Enter the binary matrix of " << N << " rows and " << M << " columns, "
          << "each row must be saparated by spaces or newlines:" << endl;
 
     for (int i = 0; i < N; i++) {
@@ -64,13 +66,13 @@ int main() {
         input += row;
     }
 
-    if (input.size() != N * 64) {
+    if (input.size() != N * M) {
         cerr << "Error: The input string length does not match size: " 
-             << N << " * 64 = " << N * 64 << endl;
+             << N << " * "<< M << " = " << N * M << endl;
         return 1;
     }
 
-    auto bytemap = groupBits(input, N);
+    auto bytemap = groupBits(input, N, M);
 
     ofstream headerFile("drawing.h");
 
@@ -80,9 +82,12 @@ int main() {
     }
 
     stringstream headerContent;
-    headerContent << "#ifndef DRAWING_H\n" << "#define DRAWING_H\n" << "char drawing[512] = {\n";
+    int bytes_array = (N/8 * M);
+    headerContent << "#ifndef DRAWING_H" << "\n#define DRAWING_H";
+    headerContent << "\n#define PAGES "<< N/8 << "\n#define COLUMNS " << M; 
+    headerContent << "\nchar drawing[" << bytes_array << "] = {\n";
     insertMatrix(bytemap, headerContent);
-    headerContent << "};\n" << "#endif\n";
+    headerContent << "};" << "\n#endif\n";
 
     headerFile << headerContent.str();
     headerFile.close();
