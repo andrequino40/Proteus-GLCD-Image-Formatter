@@ -1,5 +1,5 @@
 INPUT_FOLDER = ./inputs
-INPUT_FILE = hector.inp
+INPUT_FILE = troll.inp
 
 all: converter drawing
 converter: bytemap_converter.cc
