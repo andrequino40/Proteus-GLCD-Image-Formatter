@@ -29,15 +29,14 @@ You can also test with the included inputs.
 
 ### 3: Create the Input File  
 
-1. **Write the Number of rows (N):**  
+1. **Write the Number of rows (N) and columns (M:**  
    - `N` is the number of rows in your bit art.  
    - `N` must be a multiple of 8.
+   - `M` is the number of columns in your bit art.
+   - Be sure to add separation after each number with a space or newline
 
-2. **Write the Number of columns (M):**  
-   - `M` is the number of columns in your bit art.  
-
-3. **Paste Your Bit Art:**  
-   - Place the binary pixel art below.
+2. **Paste Your Bit Art:**  
+   - Paste the binary pixel art below.
 
 ---
 
