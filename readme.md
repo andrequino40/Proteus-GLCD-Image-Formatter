@@ -65,9 +65,9 @@ make all
 
 Copy the following files to your Proteus project:  
 
-- `animation.h`  
-- `drawing.h`  
-- All files in the `dependencies` folder.  
+- `animation.h` (optional functions) 
+- `drawing.h` (contains drawing)
+- + All files in the `dependencies` folder.  
 
 ---
 
