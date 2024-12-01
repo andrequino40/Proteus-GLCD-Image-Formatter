@@ -9,7 +9,7 @@ You can create binary pixel art using any text editor.
 - **Recommended:** Use an image or create a pixel art design. Use a converter such as [dCode Binary Image Converter](https://www.dcode.fr/binary-image).  
 - **Adjustments:** The output from the website might neet to be edited.
 - **Size:**  
-  - **Width:** The image **should** should be 128 pixels wide or less.
+  - **Width:** The image **should** be 128 pixels wide or less.
   - **Height:** The height **must** be a multiple of 8 and **should** be 64 pixels high or less.
 
 ---
@@ -66,7 +66,7 @@ make all
 Copy the following files to your Proteus project:  
 
 - `animation.h` (optional functions) 
-- `drawing.h` (contains drawing)
+- `drawing.h` 
 - + All files in the `dependencies` folder.  
 
 ---
@@ -78,7 +78,8 @@ In your code, include the following headers **in order**:
 ```c
 #include "GLCD.h"
 // afterwards
-#include "animation.h"
+#include "animation.h" (optional)
+#include "drawing.h"
 ```
 
 ---
