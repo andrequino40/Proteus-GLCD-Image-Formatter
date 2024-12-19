@@ -24,15 +24,6 @@ vector<vector<uint8_t>> groupBits(const string& input, int rows, int columns) {
     return output;
 }
 
-/* void printMatrix(const vector<vector<uint8_t>>& matrix) {
-    for (const auto& row : matrix) {
-        for (uint8_t byte : row) {
-            cout << "0x" << hex << setfill('0') << setw(2) << (int)byte << ", ";
-        }
-        cout << endl;
-    }
-} */
-
 void insertMatrix(const vector<vector<uint8_t>>& matrix, stringstream& ss) {
     for (const auto& row : matrix) {
         ss << "\t";
@@ -64,8 +55,6 @@ int main() {
     cerr << "Enter the binary matrix of " << N << " rows and " << M << " columns, "
          << "each row must be saparated by spaces or newlines:" << endl;
 
-
-    // bool read_row = true;
     int i = 0;
 
     while (cin >> row) {
@@ -100,13 +89,6 @@ int main() {
 
     auto bytemap = groupBits(input, N, M);
 
-   /*  ofstream headerFile("drawing.h");
-
-    if (!headerFile) {
-        cerr << "> ERROR: Could not create header" << endl;
-        return 1; 
-    } */
-
     int pages = N/8;
     int cols = M;
     int bytes_array = (pages * cols);
@@ -115,7 +97,7 @@ int main() {
     insertMatrix(bytemap, array);
     cout << array.str();
     cout << "};\n";
-    cout << "sprite_t "<< name << " = { " << pages << ", " << cols << ", " << name << "_array };"; 
+    cout << "// nombre: "<< name << ", filas: " << pages << ", columnas: " << cols << "\n"; 
     cout << endl;
 
 

@@ -1,6 +1,6 @@
 INPUT_FOLDER = ./inputs
 OUTPUT_FOLDER = ./outputs
-FILE_NAME = notch
+FILE_NAME = doner
 INPUT_FILE = $(FILE_NAME).inp
 OUTPUT_FILE = $(FILE_NAME).h
 
