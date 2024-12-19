@@ -24,14 +24,14 @@ vector<vector<uint8_t>> groupBits(const string& input, int rows, int columns) {
     return output;
 }
 
-/* void printMatrix(const vector<vector<uint8_t>>& matrix) {
+void printMatrix(const vector<vector<uint8_t>>& matrix) {
     for (const auto& row : matrix) {
         for (uint8_t byte : row) {
-            cout << "0x" << hex << setfill('0') << setw(2) << (int)byte << ", ";
+            cerr << "0x" << hex << setfill('0') << setw(2) << (int)byte << ", ";
         }
-        cout << endl;
+        cerr << endl;
     }
-} */
+}
 
 void insertMatrix(const vector<vector<uint8_t>>& matrix, stringstream& ss) {
     for (const auto& row : matrix) {
@@ -45,10 +45,8 @@ void insertMatrix(const vector<vector<uint8_t>>& matrix, stringstream& ss) {
 
 int main() {
     int N, M;
-    string name, input, row;
+    string input, row;
 
-    cerr << "Enter the name for the array: ";
-    cin >> name;
     cerr << "Enter the number of rows N (must be a multiple of 8): ";
     cin >> N;
     cerr << endl;
@@ -100,24 +98,23 @@ int main() {
 
     auto bytemap = groupBits(input, N, M);
 
-   /*  ofstream headerFile("drawing.h");
+    ofstream headerFile("drawing.h");
 
     if (!headerFile) {
         cerr << "> ERROR: Could not create header" << endl;
         return 1; 
-    } */
+    }
 
-    int pages = N/8;
-    int cols = M;
-    int bytes_array = (pages * cols);
-    cout << "\nchar "<< name << "_array [" << bytes_array << "] = {\n";
-    stringstream array;
-    insertMatrix(bytemap, array);
-    cout << array.str();
-    cout << "};\n";
-    cout << "sprite_t "<< name << " = { " << pages << ", " << cols << ", " << name << "_array };"; 
-    cout << endl;
+    stringstream headerContent;
+    int bytes_array = (N/8 * M);
+    headerContent << "#ifndef DRAWING_H" << "\n#define DRAWING_H";
+    headerContent << "\n#define PAGES "<< N/8 << "\n#define COLUMNS " << M; 
+    headerContent << "\nchar drawing[" << bytes_array << "] = {\n";
+    insertMatrix(bytemap, headerContent);
+    headerContent << "};" << "\n#endif\n";
 
+    headerFile << headerContent.str();
+    headerFile.close();
 
     cerr << "Header file created!" << endl;
     return 0;
