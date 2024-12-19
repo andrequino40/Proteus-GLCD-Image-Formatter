@@ -1,3 +1,5 @@
+// These functions suck and are old but sue them for inspiration if you want to
+
 // distance of image from the left side of the screen
 #define OFFSET 0
 // set frequency for delays
@@ -5,8 +7,8 @@
 #define _XTAL_FREQ 8000000
 #endif
 
-#include "drawing.h"
-
+#define PAGES 8
+#define COLUMNS 128
 void writeDrawing() {
     for (int i = 0; i < PAGES; ++i) {
         for (int j = 0; j < COLUMNS; ++j) {

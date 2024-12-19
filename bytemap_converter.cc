@@ -24,15 +24,6 @@ vector<vector<uint8_t>> groupBits(const string& input, int rows, int columns) {
     return output;
 }
 
-void printMatrix(const vector<vector<uint8_t>>& matrix) {
-    for (const auto& row : matrix) {
-        for (uint8_t byte : row) {
-            cout << "0x" << hex << setfill('0') << setw(2) << (int)byte << ", ";
-        }
-        cout << endl;
-    }
-}
-
 void insertMatrix(const vector<vector<uint8_t>>& matrix, stringstream& ss) {
     for (const auto& row : matrix) {
         ss << "\t";
@@ -45,53 +36,74 @@ void insertMatrix(const vector<vector<uint8_t>>& matrix, stringstream& ss) {
 
 int main() {
     int N, M;
-    string row, input;
+    string name, input, row;
 
-    cout << "Enter the number of rows N (must be a multiple of 8): ";
+    cerr << "- Enter the name for the array: ";
+    cin >> name;
+    cerr << endl;
+
+    cerr << "- Enter the number of rows N (must be a multiple of 8): ";
     cin >> N;
-    cout << "Enter the number of columns M: ";
+    cerr << endl;
+    
+    cerr << "- Enter the number of columns M: ";
     cin >> M;
-    cout << endl;
+    cerr << endl;
     
     if ((N % 8) != 0) {
-        cerr << "Error: N must be a multiple of 8" << endl;
+        cerr << "> ERROR: N must be a multiple of 8" << endl;
         return 1;
     }
     
-    cout << "Enter the binary matrix of " << N << " rows and " << M << " columns, "
+    cerr << "- Enter the binary matrix of " << N << " rows and " << M << " columns, "
          << "each row must be saparated by spaces or newlines:" << endl;
 
-    for (int i = 0; i < N; i++) {
-        cin >> row;
+    int i = 0;
+
+    while (cin >> row) {
+        
+        int row_size = row.size();
+
+        if (i >= N) {
+            cerr << "> WARNING: number of rows is greater than " << N << ", ignoring final rows." << endl;
+            break;
+        }
+
+        if (row_size < M) {
+            cerr << "> ERROR: Row " <<  i + 1 << " has length: "<< row_size 
+                 << ", should be: " << M << "." << endl;
+            return 1;
+        }
+
+        if (row_size > M) {
+            cerr << "> WARNING: Row " << i + 1 << " has length: " << row_size 
+                 << ", ignoring last " << row_size - M << " character/s." << endl;
+            row.erase(M);
+        }
+
         input += row;
+        i++;
     }
 
-    if (input.size() != N * M) {
-        cerr << "Error: The input string length does not match size: " 
-             << N << " * "<< M << " = " << N * M << endl;
+    if (i < N) {
+        cerr << "> ERROR: number of rows is: " << i << "but N is set to: " << N << endl;
         return 1;
     }
 
     auto bytemap = groupBits(input, N, M);
 
-    ofstream headerFile("drawing.h");
+    int pages = N/8;
+    int cols = M;
+    int bytes_array = (pages * cols);
+    cout << "\nchar "<< name << "[" << bytes_array << "] = {\n";
+    stringstream array;
+    insertMatrix(bytemap, array);
+    cout << array.str();
+    cout << "};\n";
+    cout << "// nombre: "<< name << ", filas: " << pages << ", columnas: " << cols << endl; 
+    cout << endl;
 
-    if (!headerFile) {
-        cerr << "Error: Could not create header" << endl;
-        return 1; 
-    }
 
-    stringstream headerContent;
-    int bytes_array = (N/8 * M);
-    headerContent << "#ifndef DRAWING_H" << "\n#define DRAWING_H";
-    headerContent << "\n#define PAGES "<< N/8 << "\n#define COLUMNS " << M; 
-    headerContent << "\nchar drawing[" << bytes_array << "] = {\n";
-    insertMatrix(bytemap, headerContent);
-    headerContent << "};" << "\n#endif\n";
-
-    headerFile << headerContent.str();
-    headerFile.close();
-
-    cout << "Header file created!" << endl;
+    cerr << "- Header file for \'" << name << "\' created!" << endl;
     return 0;
 }
