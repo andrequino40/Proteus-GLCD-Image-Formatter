@@ -38,12 +38,15 @@ int main() {
     int N, M;
     string name, input, row;
 
-    cerr << "Enter the name for the array: ";
+    cerr << "- Enter the name for the array: ";
     cin >> name;
-    cerr << "Enter the number of rows N (must be a multiple of 8): ";
+    cerr << endl;
+
+    cerr << "- Enter the number of rows N (must be a multiple of 8): ";
     cin >> N;
     cerr << endl;
-    cerr << "Enter the number of columns M: ";
+    
+    cerr << "- Enter the number of columns M: ";
     cin >> M;
     cerr << endl;
     
@@ -52,7 +55,7 @@ int main() {
         return 1;
     }
     
-    cerr << "Enter the binary matrix of " << N << " rows and " << M << " columns, "
+    cerr << "- Enter the binary matrix of " << N << " rows and " << M << " columns, "
          << "each row must be saparated by spaces or newlines:" << endl;
 
     int i = 0;
@@ -92,15 +95,15 @@ int main() {
     int pages = N/8;
     int cols = M;
     int bytes_array = (pages * cols);
-    cout << "\nchar "<< name << "_array [" << bytes_array << "] = {\n";
+    cout << "\nchar "<< name << "[" << bytes_array << "] = {\n";
     stringstream array;
     insertMatrix(bytemap, array);
     cout << array.str();
     cout << "};\n";
-    cout << "// nombre: "<< name << ", filas: " << pages << ", columnas: " << cols << "\n"; 
+    cout << "// nombre: "<< name << ", filas: " << pages << ", columnas: " << cols << endl; 
     cout << endl;
 
 
-    cerr << "Header file created!" << endl;
+    cerr << "- Header file for \'" << name << "\' created!" << endl;
     return 0;
 }
