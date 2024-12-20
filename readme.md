@@ -19,7 +19,7 @@ You can create binary pixel art using any text editor.
 Modify the `Makefile` to specify the name of your input/output file:
 
 ```makefile
-FILE_NAME = doner
+FILE_NAME = drawing
 INPUT_FILE = $(FILE_NAME).inp
 OUTPUT_FILE = $(FILE_NAME).h
 ```
